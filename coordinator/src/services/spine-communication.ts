@@ -33,7 +33,10 @@ async function request(message: string) {
         return {body: result.data, statusCode: result.status}
     } catch (error) {
         if (error.response) {
-            return {body: error.response.data, statusCode: error.response.status}
+            return {
+                body: `Got error response from Spine.\n\nStatus code: ${error.response.status}\n\nError message: ${error.response.data}`,
+                statusCode: 400
+            }
         } else if (error.request) {
             return {body: error.request.data, statusCode: 408}
         } else {
